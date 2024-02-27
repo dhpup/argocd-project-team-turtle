@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: REPLACE_ME_NAME
+  name: guestbook-team-turtle
 spec:
   generators:
   - matrix:
@@ -13,7 +13,7 @@ spec:
           - cluster: prod
       - list:
           elements:
-          - project: REPLACE_ME_PROJECT
+          - project: team-turtle
   template:
     metadata:
       name: 'guestbook-{{project}}-{{cluster}}'
@@ -25,7 +25,7 @@ spec:
         syncOptions:
         - CreateNamespace=true
       source:
-        repoURL: REPLACE_ME_REPO
+        repoURL: https://github.com/dhpup/argocd-project-team-turtle.git
         targetRevision: HEAD
         path: configs/guestbook/env/{{cluster}}
       destination:
